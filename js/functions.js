@@ -11,7 +11,7 @@ var css_line_count = 0;
 var js_line_count = 0;
 
 
-var writing_speed = 10;
+var writing_speed = 50;
 
 var old_target = 'html';
 
@@ -37,36 +37,49 @@ $(function(){
 				['css','}','',''],
 				['css','','',''],
 
+				['css','code{','',''],
+				['css','	padding-top : 30px;','$("code").css("padding-top","30px");','1'],	
+				['css','	font-family : monospace;','$("code").css("font-family","monospace");','1'],	
+				['css','	font-size : 9pt;','$("code").css("font-size","9pt");','1'],				
+				//['css','	overflow : hidden;','$("code").css("overflow","hidden");','1'],	
+				['css','}','',''],
+				['css','','',''],
+
 				['css','#html, #css, #js, #stats{','',''],
-				// Transition's not working right
 				['css','	transition: all ease-in 200ms;','$("#html, #css, #js, #stats").css("transition","all ease-in 200ms")','1'],
+				['css','	float : left;','$("#html, #css, #js, #stats").css("float","left");','1'],
 				['css','	background : #222;','$("#html, #css, #js, #stats").css("background","#222");','1'],
 				['css','	padding : 20px;','$("#html, #css, #js, #stats").css("padding","20px");','1'],
 				['css','	margin : 20px;','$("#html, #css, #js, #stats").css("margin","20px");','1'],
-				['css','	border-radius : 10px;','$("#html, #css, #js, #stats").css("border-radius","10px");','1'],
 				['css','	width : 600px;','$("#html, #css, #js, #stats").css("width","600px");','1'],
 				['css','}','',''],
 				['css','','',''],
 
 				['css','#html:before, #css:before, #js:before{','',''],
-				['css','	position : absolute;','$("#html:before, #css:before, #js:before").css("position","absolute");','1'],
-				['css','	top : -10px;','$("#html:before, #css:before, #js:before").css("top","-10px;");','1'],
-				['css','	padding : 3px;','$("#html:before, #css:before, #js:before").css("padding","3px");','1'],
-				['css','	left : 0px;','$("#html:before, #css:before, #js:before").css("left","0px");','1'],
-				['css','	right : 0px;','$("#html:before, #css:before, #js:before").css("right","0px");','1'],
-				['css','	background : #ddd;','$("#html:before, #css:before, #js:before").css("background","#ddd");','1'],
-				['css','	color : #000;','$("#html:before, #css:before, #js:before").css("color","#000");','1'],
-				['css','	content : "index.html";','$("#html:before, #css:before, #js:before").css("content","index.html");','1'],
+				['css','	content : "index.html";','$("<style>#html:before, #css:before, #js:before{content:' + "'index.html'" + '}</style>").appendTo("head");','1'],
+				['css','	position : absolute;','$("<style>#html:before, #css:before, #js:before{position:absolute;}</style>").appendTo("head");','1'],
+				['css','	top : -20px;','$("<style>#html:before, #css:before, #js:before{top:-20px;}</style>").appendTo("head");','1'],
+				['css','	padding : 5px;','$("<style>#html:before, #css:before, #js:before{padding:5px;}</style>").appendTo("head");','1'],
+				['css','	width : 30%;','$("<style>#html:before, #css:before, #js:before{width:30%;}</style>").appendTo("head");','1'],
+				['css','	left : 0px;','$("<style>#html:before, #css:before, #js:before{left:0px;}</style>").appendTo("head");','1'],
+				['css','	background : #ddd;','$("<style>#html:before, #css:before, #js:before{background:#ddd;}</style>").appendTo("head");','1'],
+				['css','	color : #000;','$("<style>#html:before, #css:before, #js:before{color:#000;}</style>").appendTo("head");','1'],
+				['css','	border-top-left-radius: 5px;','$("<style>#html:before, #css:before, #js:before{border-top-left-radius:5px;}</style>").appendTo("head");','1'],
+				['css','	border-top-right-radius: 5px;','$("<style>#html:before, #css:before, #js:before{border-top-right-radius:5px;}</style>").appendTo("head");','1'],
+				['css','	cursor : pointer;','$("<style>#html:before, #css:before, #js:before{cursor:pointer;}</style>").appendTo("head");','1'],
 				['css','}','',''],
 				['css','','',''],
 
+
 				['css','#css:before{','',''],
-				['css','	content : "style.css";','$("#css:before").css("content","style.css");','1'],
+				['css','	content : "style.css";','$("<style>#css:before{content:' + "'style.css'" + '}</style>").appendTo("head");','1'],
+				['css','	left : 33.3%;','$("<style>#css:before{left:33.3%;}</style>").appendTo("head");','1'],
 				['css','}','',''],
 				['css','','',''],
 
 				['css','#js:before{','',''],
-				['css','	content : "functions.js";','$("#css:before").css("content","functions.js");','1'],
+				['css','	content : "functions.js";','$("<style>#js:before{content:' + "'functions.js'" + '}</style>").appendTo("head");','1'],
+				['css','	left : 66.6%;','$("<style>#js:before{left:66.6%;}</style>").appendTo("head");','1'],
 				['css','}','',''],
 				['css','','',''],
 
@@ -78,17 +91,17 @@ $(function(){
 				['html','	</head>','','1'],
 				['html','','',''],
 
-/*
+
 				['js','function set_tab_control(){','',''],
 				['js','$("#html, #css, #js").css("position","absolute").click( function(){','','1'],
-				['js','$("#html, #css, #js").css({"z-index":"0","max-height":"20px"});','','2'],
-				['js','$(this).css({"z-index":"1","max-height":"1000px"});','','2'],
+				['js','$("#html, #css, #js").css({"z-index":"0","height":"20px","opacity":".75"});','','2'],
+				['js','$(this).css({"z-index":"1","height":"1000px","opacity":"1"});','','2'],
 				['js','});','','1'],
 				['js','}','',''],
 				['js','','',''],
 				['js','set_tab_control();','set_tab_control();',''],
 				['js','','',''],
-*/
+
 
 				//Remove <br/>s
 				['html','<body>','','1'],
@@ -108,20 +121,7 @@ $(function(){
 				['html','<div id="character_count">','$("#stats").append("<div id=' + "'character_count'" + '></div>")','3'],	
 				['html','<span>0</span> characters','$("#character_count").append("<span>0</span> characters")','4'],
 				['html','</div>','','3'],      
-				['html','</div>','','2'],      
-
-
-				['css','#stats{','',''],
-				['css','	position : fixed;','$("#stats").css("position","fixed");','1'],
-				['css','	right : 20px;','$("#stats").css("right","20px");','1'],
-				['css','	bottom : 20px;','$("#stats").css("bottom","20px");','1'],
-				['css','}','',''],
-				['css','','',''],	
-
-				['css','#stats div{','',''],
-				['css','	display : block;','$("#stats div").css("display","block");','1'],
-				['css','}','',''],
-				['css','','',''],	
+				['html','</div>','','2'], 	
 
 
 				['js','function update_stats(){','',''],
@@ -140,16 +140,22 @@ $(function(){
 				['js','}','',''],
 				['js','','',''],
 
-				['js','setInterval("update_stats()",100);','setInterval("update_stats()",100);',''],
+				['js','setInterval("update_stats()",100);','setInterval("update_stats()",100);',''],     
 
 
-				['css','code{','',''],
-				['css','	font-family : monospace;','$("code").css("font-family","monospace");','1'],	
-				['css','	font-size : 9pt;','$("code").css("font-size","9pt");','1'],				
+				['css','#stats{','',''],
+				['css','	position : fixed;','$("#stats").css("position","fixed");','1'],
+				['css','	right : 20px;','$("#stats").css("right","20px");','1'],
+				['css','	bottom : 20px;','$("#stats").css("bottom","20px");','1'],
+				['css','}','',''],
+				['css','','',''],	
+
+				['css','#stats div{','',''],
+				['css','	display : block;','$("#stats div").css("display","block");','1'],
 				['css','}','',''],
 				['css','','',''],
 
-/*
+
 				['html','	<body>','','1'],
 				['html','		<h1>' + title + '</h1>','$("#frame").append("<h1>Real Time Code Graphing</h1>")','2'],
 
@@ -181,12 +187,10 @@ $(function(){
 				['css','','',''],
 
 
-				['html','		</svg>','','2'],*/
+				['html','		</svg>','','2'],
 				['html','	</body>','','1'],
 				['html','</html>','','']
 			];
-
-	//$('#html, #css, #js').css('position','absolute');
 
 	write_code(html);
 });
@@ -254,10 +258,13 @@ function update_stats(){
 
 function set_tab_control(){
 	$('#html, #css, #js').css('position','absolute').click( function(){
-		$('#html, #css, #js').css({'z-index':'0','max-height':'20px'});
-		$(this).css({'z-index':'1','max-height':'1000px'});
+		$('#html, #css, #js').css({'z-index':'0','height':'20px','opacity':'.75'});
+		$(this).css({'z-index':'1','height':'1000px','opacity':'1'});
 	});
 }
+
+
+
 
 /*!
  * Dynamically changing favicons with JavaScript
