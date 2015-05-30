@@ -2,22 +2,30 @@
 	position: relative;
 }
 
-/*body{
-	width:1024px;
-	height:633px;
-}*/
+body{
+	width:1424px;
+}
 
 code span{
 	display:block;
 }
 
-#css, #js{
+#html div, #css div, #js div{
+	max-height:600px;
+	overflow:scroll;
+}
+
+#css{
 	opacity:0;
 }
 
+#js{
+	display:none;
+}
+
 #frame{
-	position:absolute;
-	left:660px;
+	position:fixed;
+	left:700px;
 }
 
 #stats{
@@ -25,4 +33,41 @@ code span{
 	background : #222;
 	padding : 20px;
 	margin : 20px;
+}
+
+code span:last-of-type:after{
+	-webkit-animation: NAME-YOUR-ANIMATION 1s infinite; /* Safari 4+ */
+    -moz-animation:    NAME-YOUR-ANIMATION 1s infinite; /* Fx 5+ */
+    -o-animation:      NAME-YOUR-ANIMATION 1s infinite; /* Opera 12+ */
+    animation:         NAME-YOUR-ANIMATION 1s infinite; 
+    content:'|';
+}
+
+@-webkit-keyframes NAME-YOUR-ANIMATION {
+  0%   { color:  #222; }
+  25%   { color:  #222; }
+  50% { color:  #fff; }
+  75% { color:  #fff; }
+  100%   { color:  #222; }
+}
+@-moz-keyframes NAME-YOUR-ANIMATION {
+  0%   { color:  #222; }
+  25%   { color:  #222; }
+  50% { color:  #fff; }
+  75% { color:  #fff; }
+  100%   { color:  #222; }
+}
+@-o-keyframes NAME-YOUR-ANIMATION {
+  0%   { color:  #222; }
+  25%   { color:  #222; }
+  50% { color:  #fff; }
+  75% { color:  #fff; }
+  100%   { color:  #222; }
+}
+@keyframes NAME-YOUR-ANIMATION {
+  0%   { color:  #222; }
+  25%   { color:  #222; }
+  50% { color:  #fff; }
+  75% { color:  #fff; }
+  100%   { color:  #222; }
 }
